@@ -1,6 +1,6 @@
 import XCTest
-@testable import AlgebraicDataTypesTests
+@testable import PhantomlikeTests
 
 XCTMain([
-    testCase(AlgebraicDataTypesTests.allTests),
+    testCase(PhantomlikeTests.allTests),
 ])
