@@ -9,9 +9,9 @@ Use Swift Package Manager.
 import PackageDescription
 
 let package = Package(
-    name: "Phantomlike",
+    name: "Phantomlike.swift",
     dependencies: [
-      .Package(url: "https://github.com/adamnemecek/Phantomlike.git", majorVersion: 1)
+      .Package(url: "https://github.com/adamnemecek/Phantomlike.swift.git", majorVersion: 1)
     ]
 )
 ```
