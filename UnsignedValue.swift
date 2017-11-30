@@ -13,12 +13,12 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
     public typealias Words = Storage.Words
     public typealias IntegerLiteralType = Storage.IntegerLiteralType
 
-    public init<T>(_ source: T) where T : BinaryFloatingPoint {
+    public init<T: BinaryFloatingPoint>(_ source: T) {
         content = .init(source)
     }
 
-    public init(_truncatingBits: UInt) {
-        content = .init(_truncatingBits)
+    public init(_truncatingBits bits: UInt) {
+        content = .init(bits)
     }
 
     public var words: Words {
@@ -34,7 +34,7 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
     }
 
     public static func /=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        lhs.content /= rhs.content
+        lhs = lhs / rhs
     }
 
     public static func %(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
@@ -42,7 +42,7 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
     }
 
     public static func %=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        lhs.content %= rhs.content
+        lhs = lhs % rhs
     }
 
     public static var bitWidth: Int {
