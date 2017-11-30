@@ -13,6 +13,7 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
     public typealias Magnitude = Storage.Magnitude
     public typealias Words = Storage.Words
 
+    private let content: Storage
 
     public init(_truncatingBits bits: UInt) {
         fatalError()
@@ -79,8 +80,6 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
         fatalError()
     }
 
-
-
     public static var bitWidth: Int {
         return Storage.bitWidth
     }
@@ -105,11 +104,11 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
         fatalError()
     }
 
-    public func multipliedFullWidth(by other: SignedValue) -> (high: SignedValue, low: SignedValue.Magnitude) {
+    public func multipliedFullWidth(by other: SignedValue) -> (high: SignedValue, low: Magnitude) {
         fatalError()
     }
 
-    public func dividingFullWidth(_ dividend: (high: SignedValue, low: SignedValue.Magnitude)) -> (quotient: SignedValue, remainder: SignedValue) {
+    public func dividingFullWidth(_ dividend: (high: SignedValue, low: Magnitude)) -> (quotient: SignedValue, remainder: SignedValue) {
         fatalError()
     }
 
@@ -127,6 +126,14 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
 
     public var hashValue: Int {
         fatalError()
+    }
+
+    public static func ==(lhs: SignedValue, rhs: SignedValue)   -> Bool {
+        return lhs.content == rhs.content
+    }
+
+    public static func <(lhs: SignedValue, rhs: SignedValue)   -> Bool {
+        return lhs.content < rhs.content
     }
 }
 

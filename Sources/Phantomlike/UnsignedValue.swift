@@ -49,6 +49,10 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
         return Storage.bitWidth
     }
 
+    public var description: String {
+            fatalError()
+    }
+
     public func addingReportingOverflow(_ rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
         let r =  content.addingReportingOverflow(rhs.content)
         return (.init(r.partialValue), r.overflow)
@@ -77,7 +81,7 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
 
     }
 
-    public func multipliedFullWidth(by other: UnsignedValue) -> (high: UnsignedValue, low: UnsignedValue.Magnitude) {
+    public func multipliedFullWidth(by other: UnsignedValue) -> (high: UnsignedValue, low: Magnitude) {
 //        let r =  content.multipliedFullWidth(rhs.content)
 //        return (.init(r.high), )
         fatalError()
