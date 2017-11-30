@@ -6,18 +6,13 @@
 //  Copyright © 2017 Adam Nemecek. All rights reserved.
 //
 
-
 public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> : UnsignedInteger, FixedWidthInteger {
-
-    private var content: Storage
 
     public typealias Words = Storage.Words
     public typealias IntegerLiteralType = Storage.IntegerLiteralType
     public typealias Magnitude = Storage.Magnitude
 
-    public var magnitude: Magnitude {
-        fatalError()
-    }
+    private let content: Storage
 
     public init<T: BinaryFloatingPoint>(_ source: T) {
         content = .init(source)
@@ -29,6 +24,10 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
 
     public var words: Words {
         return content.words
+    }
+
+    public var magnitude: Magnitude {
+        return content.magnitude
     }
 
     public var trailingZeroBitCount: Int {
@@ -56,7 +55,7 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
     }
 
     public var description: String {
-            fatalError()
+        return "\(Storage.self)(\(content))"
     }
 
     public func addingReportingOverflow(_ rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
@@ -84,17 +83,16 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
     public func remainderReportingOverflow(dividingBy rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
         let r =  content.remainderReportingOverflow(dividingBy: rhs.content)
         return (.init(r.partialValue), r.overflow)
-
     }
 
     public func multipliedFullWidth(by other: UnsignedValue) -> (high: UnsignedValue, low: Magnitude) {
-//        let r =  content.multipliedFullWidth(rhs.content)
-//        return (.init(r.high), )
-        fatalError()
+        let r = content.multipliedFullWidth(by: other.content)
+        return (.init(r.high), r.low)
     }
 
     public func dividingFullWidth(_ dividend: (high: UnsignedValue, low: Magnitude)) -> (quotient: UnsignedValue, remainder: UnsignedValue) {
-        fatalError()
+        let r =  content.dividingFullWidth((dividend.high.content, dividend.low))
+        return (.init(r.quotient), .init(r.remainder))
     }
 
     public var nonzeroBitCount: Int {

@@ -9,15 +9,11 @@
 
 public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : SignedInteger, FixedWidthInteger {
 
-    private var content: Storage
-
     public typealias Words = Storage.Words
     public typealias IntegerLiteralType = Storage.IntegerLiteralType
     public typealias Magnitude = Storage.Magnitude
 
-    public var magnitude: Magnitude {
-        fatalError()
-    }
+    private let content: Storage
 
     public init<T: BinaryFloatingPoint>(_ source: T) {
         content = .init(source)
@@ -29,6 +25,10 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
 
     public var words: Words {
         return content.words
+    }
+
+    public var magnitude: Magnitude {
+        return content.magnitude
     }
 
     public var trailingZeroBitCount: Int {
@@ -56,7 +56,7 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
     }
 
     public var description: String {
-        fatalError()
+        return "\(Storage.self)(\(content))"
     }
 
     public func addingReportingOverflow(_ rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
@@ -84,17 +84,16 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
     public func remainderReportingOverflow(dividingBy rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
         let r =  content.remainderReportingOverflow(dividingBy: rhs.content)
         return (.init(r.partialValue), r.overflow)
-
     }
 
     public func multipliedFullWidth(by other: SignedValue) -> (high: SignedValue, low: Magnitude) {
-        //        let r =  content.multipliedFullWidth(rhs.content)
-        //        return (.init(r.high), )
-        fatalError()
+        let r = content.multipliedFullWidth(by: other.content)
+        return (.init(r.high), r.low)
     }
 
     public func dividingFullWidth(_ dividend: (high: SignedValue, low: Magnitude)) -> (quotient: SignedValue, remainder: SignedValue) {
-        fatalError()
+        let r =  content.dividingFullWidth((dividend.high.content, dividend.low))
+        return (.init(r.quotient), .init(r.remainder))
     }
 
     public var nonzeroBitCount: Int {
