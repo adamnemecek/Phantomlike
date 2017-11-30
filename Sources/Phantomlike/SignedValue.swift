@@ -6,7 +6,6 @@
 //  Copyright © 2017 Adam Nemecek. All rights reserved.
 //
 
-
 public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : SignedInteger, FixedWidthInteger {
 
     public typealias Words = Storage.Words
