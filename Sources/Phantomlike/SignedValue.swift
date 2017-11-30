@@ -7,133 +7,126 @@
 //
 
 
-struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : SignedInteger, FixedWidthInteger {
+public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : SignedInteger, FixedWidthInteger {
 
-    init(_truncatingBits bits: UInt) {
+    public typealias IntegerLiteralType = Storage.IntegerLiteralType
+    public typealias Magnitude = Storage.Magnitude
+    public typealias Words = Storage.Words
+
+
+    public init(_truncatingBits bits: UInt) {
         fatalError()
     }
 
-    static func -(lhs: SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) -> SignedValue<Storage, Unit> {
+    public static func -(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
         fatalError()
     }
 
-    static func -=(lhs: inout SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) {
+    public static func -=(lhs: inout SignedValue, rhs: SignedValue) {
         fatalError()
     }
 
-
-
-    static func +=(lhs: inout SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) {
+    public static func +=(lhs: inout SignedValue, rhs: SignedValue) {
         fatalError()
     }
 
-    static func +(lhs: SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) -> SignedValue<Storage, Unit> {
-        fatalError()
-    }
-
-
-    init(integerLiteral value: Storage.IntegerLiteralType) {
-        fatalError()
-    }
-
-    init<T>(_ source: T) where T : BinaryFloatingPoint {
-        fatalError()
-    }
-
-    var words: Storage.Words {
-        fatalError()
-    }
-
-    var trailingZeroBitCount: Int {
-        fatalError()
-    }
-
-    static func /(lhs: SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) -> SignedValue<Storage, Unit> {
-        fatalError()
-    }
-
-    static func /=(lhs: inout SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) {
-        fatalError()
-    }
-
-    static func %(lhs: SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) -> SignedValue<Storage, Unit> {
-        fatalError()
-    }
-
-    static func %=(lhs: inout SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) {
-        fatalError()
-    }
-
-    static func *(lhs: SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) -> SignedValue<Storage, Unit> {
-        fatalError()
-    }
-
-    static func *=(lhs: inout SignedValue<Storage, Unit>, rhs: SignedValue<Storage, Unit>) {
-        fatalError()
-    }
-
-    var magnitude: Storage.Magnitude {
+    public static func +(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
         fatalError()
     }
 
 
-    typealias IntegerLiteralType = Storage.IntegerLiteralType
+    public init(integerLiteral value: IntegerLiteralType) {
+        fatalError()
+    }
+
+    public init<T: BinaryFloatingPoint>(_ source: T) {
+        fatalError()
+    }
+
+    public var words: Storage.Words {
+        fatalError()
+    }
+
+    public var trailingZeroBitCount: Int {
+        fatalError()
+    }
+
+    public static func /(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        fatalError()
+    }
+
+    public static func /=(lhs: inout SignedValue, rhs: SignedValue) {
+        fatalError()
+    }
+
+    public static func %(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        fatalError()
+    }
+
+    public static func %=(lhs: inout SignedValue, rhs: SignedValue) {
+        fatalError()
+    }
+
+    public static func *(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        fatalError()
+    }
+
+    public static func *=(lhs: inout SignedValue, rhs: SignedValue) {
+        fatalError()
+    }
+
+    public var magnitude: Storage.Magnitude {
+        fatalError()
+    }
 
 
-    typealias Magnitude = Storage.Magnitude
 
-    typealias Words = Storage.Words
-
-    static var bitWidth: Int {
+    public static var bitWidth: Int {
         return Storage.bitWidth
     }
 
-    func addingReportingOverflow(_ rhs: SignedValue<Storage, Unit>) -> (partialValue: SignedValue<Storage, Unit>, overflow: Bool) {
+    public func addingReportingOverflow(_ rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
             fatalError()
     }
 
-    func subtractingReportingOverflow(_ rhs: SignedValue<Storage, Unit>) -> (partialValue: SignedValue<Storage, Unit>, overflow: Bool) {
+    public func subtractingReportingOverflow(_ rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
         fatalError()
     }
 
-    func multipliedReportingOverflow(by rhs: SignedValue<Storage, Unit>) -> (partialValue: SignedValue<Storage, Unit>, overflow: Bool) {
+    public func multipliedReportingOverflow(by rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
         fatalError()
     }
 
-    func dividedReportingOverflow(by rhs: SignedValue<Storage, Unit>) -> (partialValue: SignedValue<Storage, Unit>, overflow: Bool) {
+    public func dividedReportingOverflow(by rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
         fatalError()
     }
 
-    func remainderReportingOverflow(dividingBy rhs: SignedValue<Storage, Unit>) -> (partialValue: SignedValue<Storage, Unit>, overflow: Bool) {
+    public func remainderReportingOverflow(dividingBy rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
         fatalError()
     }
 
-    func multipliedFullWidth(by other: SignedValue<Storage, Unit>) -> (high: SignedValue<Storage, Unit>, low: SignedValue<Storage, Unit>.Magnitude) {
+    public func multipliedFullWidth(by other: SignedValue) -> (high: SignedValue, low: SignedValue.Magnitude) {
         fatalError()
     }
 
-    func dividingFullWidth(_ dividend: (high: SignedValue<Storage, Unit>, low: SignedValue<Storage, Unit>.Magnitude)) -> (quotient: SignedValue<Storage, Unit>, remainder: SignedValue<Storage, Unit>) {
+    public func dividingFullWidth(_ dividend: (high: SignedValue, low: SignedValue.Magnitude)) -> (quotient: SignedValue, remainder: SignedValue) {
         fatalError()
     }
 
-    var nonzeroBitCount: Int {
+    public var nonzeroBitCount: Int {
         fatalError()
     }
 
-    var leadingZeroBitCount: Int {
+    public var leadingZeroBitCount: Int {
         fatalError()
     }
 
-    var byteSwapped: SignedValue<Storage, Unit> {
+    public var byteSwapped: SignedValue {
         fatalError()
     }
 
-    var hashValue: Int {
+    public var hashValue: Int {
         fatalError()
     }
-
-
 }
-
-
 
