@@ -12,7 +12,12 @@ class PhantomlikeTests: XCTestCase {
         // results.
 //        XCTAssertEqual(Phantomlike().text, "Hello, World!")
         typealias Hertz = SignedValue<Int, HertzUnit>
+        typealias Other = SignedValue<Int, String>
         let h : Hertz = 10
+
+        print(h)
+//        XCTAssert(h == 10)
+//        let z = h + Other(20)
     }
 
 
