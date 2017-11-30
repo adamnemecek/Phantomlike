@@ -1,10 +1,11 @@
-////
-////  main.swift
-////  Phantomlike
-////
-////  Created by Adam Nemecek on 11/29/17.
-////  Copyright © 2017 Adam Nemecek. All rights reserved.
-////
+//
+//  FloatingValue.swift
+//  Phantomlike
+//
+//  Created by Adam Nemecek on 11/29/17.
+//  Copyright © 2017 Adam Nemecek. All rights reserved.
+//
+
 public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
     public typealias IntegerLiteralType = Storage.IntegerLiteralType
     public typealias Exponent = Storage.Exponent
