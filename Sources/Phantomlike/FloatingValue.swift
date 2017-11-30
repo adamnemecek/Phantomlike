@@ -5,20 +5,20 @@
 ////  Created by Adam Nemecek on 11/29/17.
 ////  Copyright © 2017 Adam Nemecek. All rights reserved.
 ////
-struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
-    typealias IntegerLiteralType = Storage.IntegerLiteralType
-    typealias Exponent = Storage.Exponent
-    typealias FloatLiteralType = Storage.FloatLiteralType
+public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
+    public typealias IntegerLiteralType = Storage.IntegerLiteralType
+    public typealias Exponent = Storage.Exponent
+    public typealias FloatLiteralType = Storage.FloatLiteralType
 
-    typealias Magnitude = Storage.Magnitude
-    typealias Stride = Storage.Stride
-    typealias RawSignificand = Storage.RawSignificand
-    typealias RawExponent = Storage.RawExponent
+    public typealias Magnitude = Storage.Magnitude
+    public typealias Stride = Storage.Stride
+    public typealias RawSignificand = Storage.RawSignificand
+    public typealias RawExponent = Storage.RawExponent
 
     private var content: Storage
 
     public init(_ value: UInt8) {
-        fatalError()
+        content = .init(value)
     }
 
     public init(_ value: Int8) {
@@ -73,12 +73,12 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
             fatalError()
     }
 
-    init?<T>(exactly source: T) where T : BinaryInteger {
+    public init?<T>(exactly source: T) where T : BinaryInteger {
         fatalError()
     }
 
-    mutating func round(_ rule: FloatingPointRoundingRule) {
-
+    public mutating func round(_ rule: FloatingPointRoundingRule) {
+        content.round(rule)
     }
 
     public static func -=(lhs: inout FloatingValue, rhs: FloatingValue) {
@@ -97,7 +97,6 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
         lhs = lhs + rhs
     }
 
-
     public init(sign: FloatingPointSign, exponentBitPattern: RawExponent, significandBitPattern: RawSignificand) {
         fatalError()
     }
@@ -107,7 +106,7 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
     }
 
     public init(sign: FloatingPointSign, exponent: Exponent, significand: FloatingValue) {
-//        content
+//        content = Storage(sign: sign, exponent: exponent, significand: significand)
         fatalError()
     }
 
@@ -185,10 +184,6 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
 
     public mutating func addProduct(_ lhs: FloatingValue, _ rhs: FloatingValue) {
         content.addProduct(lhs.content, rhs.content)
-    }
-
-    private init(content: Storage) {
-        self.content = content
     }
 
     public var nextUp: FloatingValue {
@@ -279,4 +274,7 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
         return content.hashValue
     }
 
+    private init(content: Storage) {
+        self.content = content
+    }
 }
