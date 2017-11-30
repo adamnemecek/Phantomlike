@@ -30,7 +30,7 @@ typealias Second = UnsignedValue<UInt16, TimeUnit>
 let s: Second = 10
 let hz: Hertz = 20
 
-print(hz + hz) /// => 40
+print(hz + hz) /// => Hertz(40)
 print(s + hz) /// => compiler error
 
 ```
