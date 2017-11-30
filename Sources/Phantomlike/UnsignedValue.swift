@@ -8,10 +8,16 @@
 
 
 public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> : UnsignedInteger, FixedWidthInteger {
+
     private var content: Storage
 
     public typealias Words = Storage.Words
     public typealias IntegerLiteralType = Storage.IntegerLiteralType
+    public typealias Magnitude = Storage.Magnitude
+
+    public var magnitude: Magnitude {
+        fatalError()
+    }
 
     public init<T: BinaryFloatingPoint>(_ source: T) {
         content = .init(source)

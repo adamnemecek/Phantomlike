@@ -9,102 +9,87 @@
 
 public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : SignedInteger, FixedWidthInteger {
 
+    private var content: Storage
+
+    public typealias Words = Storage.Words
     public typealias IntegerLiteralType = Storage.IntegerLiteralType
     public typealias Magnitude = Storage.Magnitude
-    public typealias Words = Storage.Words
 
-    private let content: Storage
-
-    public init(_truncatingBits bits: UInt) {
-        fatalError()
-    }
-
-    public static func -(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        fatalError()
-    }
-
-    public static func -=(lhs: inout SignedValue, rhs: SignedValue) {
-        fatalError()
-    }
-
-    public static func +=(lhs: inout SignedValue, rhs: SignedValue) {
-        fatalError()
-    }
-
-    public static func +(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        fatalError()
-    }
-
-
-    public init(integerLiteral value: IntegerLiteralType) {
+    public var magnitude: Magnitude {
         fatalError()
     }
 
     public init<T: BinaryFloatingPoint>(_ source: T) {
-        fatalError()
+        content = .init(source)
     }
 
-    public var words: Storage.Words {
-        fatalError()
+    public init(_truncatingBits bits: UInt) {
+        content = .init(bits)
+    }
+
+    public var words: Words {
+        return content.words
     }
 
     public var trailingZeroBitCount: Int {
-        fatalError()
+        return content.trailingZeroBitCount
     }
 
     public static func /(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        fatalError()
+        return .init(lhs.content / rhs.content)
     }
 
     public static func /=(lhs: inout SignedValue, rhs: SignedValue) {
-        fatalError()
+        lhs = lhs / rhs
     }
 
     public static func %(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        fatalError()
+        return .init(lhs.content % rhs.content)
     }
 
     public static func %=(lhs: inout SignedValue, rhs: SignedValue) {
-        fatalError()
-    }
-
-    public static func *(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        fatalError()
-    }
-
-    public static func *=(lhs: inout SignedValue, rhs: SignedValue) {
-        fatalError()
-    }
-
-    public var magnitude: Storage.Magnitude {
-        fatalError()
+        lhs = lhs % rhs
     }
 
     public static var bitWidth: Int {
         return Storage.bitWidth
     }
 
+    public var description: String {
+        fatalError()
+    }
+
     public func addingReportingOverflow(_ rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-            fatalError()
+        let r =  content.addingReportingOverflow(rhs.content)
+        return (.init(r.partialValue), r.overflow)
     }
 
     public func subtractingReportingOverflow(_ rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-        fatalError()
+        let r =  content.subtractingReportingOverflow(rhs.content)
+        return (.init(r.partialValue), r.overflow)
+
     }
 
     public func multipliedReportingOverflow(by rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-        fatalError()
+        let r =  content.multipliedReportingOverflow(by: rhs.content)
+        return (.init(r.partialValue), r.overflow)
+
     }
 
     public func dividedReportingOverflow(by rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-        fatalError()
+        let r =  content.dividedReportingOverflow(by: rhs.content)
+        return (.init(r.partialValue), r.overflow)
     }
 
     public func remainderReportingOverflow(dividingBy rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-        fatalError()
+        let r =  content.remainderReportingOverflow(dividingBy: rhs.content)
+        return (.init(r.partialValue), r.overflow)
+
     }
 
     public func multipliedFullWidth(by other: SignedValue) -> (high: SignedValue, low: Magnitude) {
+        //        let r =  content.multipliedFullWidth(rhs.content)
+        //        return (.init(r.high), )
         fatalError()
     }
 
@@ -113,19 +98,47 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
     }
 
     public var nonzeroBitCount: Int {
-        fatalError()
+        return content.nonzeroBitCount
     }
 
     public var leadingZeroBitCount: Int {
-        fatalError()
+        return content.leadingZeroBitCount
     }
 
     public var byteSwapped: SignedValue {
-        fatalError()
+        return .init(content.byteSwapped)
+    }
+
+    public static func -=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs - rhs
+    }
+
+    public static func -(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content - rhs.content)
+    }
+
+    public static func +=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs + rhs
+    }
+
+    public static func +(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content + rhs.content)
+    }
+
+    public init(integerLiteral value: IntegerLiteralType) {
+        content = .init(integerLiteral: value)
     }
 
     public var hashValue: Int {
-        fatalError()
+        return content.hashValue
+    }
+
+    public static func *(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content * rhs.content)
+    }
+
+    public static func *=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs * rhs
     }
 
     public static func ==(lhs: SignedValue, rhs: SignedValue)   -> Bool {
