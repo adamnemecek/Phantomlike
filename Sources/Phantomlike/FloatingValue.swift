@@ -98,8 +98,12 @@ public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloating
         lhs = lhs + rhs
     }
 
-    public init(sign: FloatingPointSign, exponentBitPattern: RawExponent, significandBitPattern: RawSignificand) {
-        fatalError()
+    public init(sign: FloatingPointSign,
+                exponentBitPattern: RawExponent,
+                significandBitPattern: RawSignificand) {
+        content = Storage(sign: sign,
+                          exponentBitPattern: exponentBitPattern,
+                          significandBitPattern: significandBitPattern)
     }
 
     public init(integerLiteral value: IntegerLiteralType) {
@@ -107,8 +111,9 @@ public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloating
     }
 
     public init(sign: FloatingPointSign, exponent: Exponent, significand: FloatingValue) {
-//        content = Storage(sign: sign, exponent: exponent, significand: significand)
-        fatalError()
+        content = Storage(sign: sign,
+                          exponent: exponent,
+                          significand: significand.content)
     }
 
     public static var nan: FloatingValue {
