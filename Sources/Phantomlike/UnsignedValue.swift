@@ -137,11 +137,11 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
         lhs = lhs * rhs
     }
 
-    public static func ==(lhs: UnsignedValue, rhs: UnsignedValue)   -> Bool {
+    public static func ==(lhs: UnsignedValue, rhs: UnsignedValue) -> Bool {
         return lhs.content == rhs.content
     }
 
-    public static func <(lhs: UnsignedValue, rhs: UnsignedValue)   -> Bool {
+    public static func <(lhs: UnsignedValue, rhs: UnsignedValue) -> Bool {
         return lhs.content < rhs.content
     }
 }

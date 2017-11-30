@@ -138,11 +138,11 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
         lhs = lhs * rhs
     }
 
-    public static func ==(lhs: SignedValue, rhs: SignedValue)   -> Bool {
+    public static func ==(lhs: SignedValue, rhs: SignedValue) -> Bool {
         return lhs.content == rhs.content
     }
 
-    public static func <(lhs: SignedValue, rhs: SignedValue)   -> Bool {
+    public static func <(lhs: SignedValue, rhs: SignedValue) -> Bool {
         return lhs.content < rhs.content
     }
 }
