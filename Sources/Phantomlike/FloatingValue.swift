@@ -70,11 +70,12 @@ public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloating
     }
 
     public init(floatLiteral value: FloatLiteralType) {
-            fatalError()
+        content = .init(floatLiteral: value)
     }
 
-    public init?<T>(exactly source: T) where T : BinaryInteger {
-        fatalError()
+    public init?<T: BinaryInteger>(exactly source: T) {
+        guard let content = Storage(exactly: source) else { return nil }
+        self.content = content
     }
 
     public mutating func round(_ rule: FloatingPointRoundingRule) {
@@ -102,7 +103,7 @@ public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloating
     }
 
     public init(integerLiteral value: IntegerLiteralType) {
-        fatalError()
+        content = .init(integerLiteral: value)
     }
 
     public init(sign: FloatingPointSign, exponent: Exponent, significand: FloatingValue) {
