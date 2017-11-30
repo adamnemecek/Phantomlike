@@ -79,26 +79,6 @@ public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloating
         self.content = content
     }
 
-    public mutating func round(_ rule: FloatingPointRoundingRule) {
-        content.round(rule)
-    }
-
-    public static func -=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        lhs = lhs - rhs
-    }
-
-    public static func -(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        return .init(content: lhs.content - rhs.content)
-    }
-
-    public static func +(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        return .init(content: lhs.content + rhs.content)
-    }
-
-    public static func+=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        lhs = lhs + rhs
-    }
-
     public init(sign: FloatingPointSign,
                 exponentBitPattern: RawExponent,
                 significandBitPattern: RawSignificand) {
@@ -115,6 +95,42 @@ public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloating
         content = Storage(sign: sign,
                           exponent: exponent,
                           significand: significand.content)
+    }
+
+    public static func +(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
+        return .init(content: lhs.content + rhs.content)
+    }
+
+    public static func +=(lhs: inout FloatingValue, rhs: FloatingValue) {
+        lhs = lhs + rhs
+    }
+
+    public static func -(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
+        return .init(content: lhs.content - rhs.content)
+    }
+
+    public static func -=(lhs: inout FloatingValue, rhs: FloatingValue) {
+        lhs = lhs - rhs
+    }
+
+    public static func *(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
+        return .init(content: lhs.content * rhs.content)
+    }
+
+    public static func *=(lhs: inout FloatingValue, rhs: FloatingValue) {
+        lhs = lhs * rhs
+    }
+
+    public static func /(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
+        return .init(content: lhs.content / rhs.content)
+    }
+
+    public static func /=(lhs: inout FloatingValue, rhs: FloatingValue) {
+        lhs = lhs / rhs
+    }
+
+    public mutating func round(_ rule: FloatingPointRoundingRule) {
+        content.round(rule)
     }
 
     public static var nan: FloatingValue {
@@ -163,22 +179,6 @@ public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloating
 
     public var significand: FloatingValue {
         return .init(content: content.significand)
-    }
-
-    public static func *(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        return .init(content: lhs.content * rhs.content)
-    }
-
-    public static func *=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        lhs = lhs * rhs
-    }
-
-    public static func /(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        return .init(content: lhs.content / rhs.content)
-    }
-
-    public static func /=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        lhs = lhs / rhs
     }
 
     public mutating func formRemainder(dividingBy other: FloatingValue) {

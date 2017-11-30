@@ -31,6 +31,58 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
         return "SignedValue(\(content), unit: \(Unit.self))"
     }
 
+    public static func +(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content + rhs.content)
+    }
+
+    public static func +=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs + rhs
+    }
+
+    public static func -(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content - rhs.content)
+    }
+
+    public static func -=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs - rhs
+    }
+
+    public static func *(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content * rhs.content)
+    }
+
+    public static func *=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs * rhs
+    }
+
+    public static func /(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content / rhs.content)
+    }
+
+    public static func /=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs / rhs
+    }
+
+    public static func %(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content % rhs.content)
+    }
+
+    public static func %=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs % rhs
+    }
+
+    public var hashValue: Int {
+        return content.hashValue
+    }
+
+    public static func ==(lhs: SignedValue, rhs: SignedValue) -> Bool {
+        return lhs.content == rhs.content
+    }
+
+    public static func <(lhs: SignedValue, rhs: SignedValue) -> Bool {
+        return lhs.content < rhs.content
+    }
+
     public func addingReportingOverflow(_ rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
         let r = content.addingReportingOverflow(rhs.content)
         return (.init(r.partialValue), r.overflow)
@@ -90,60 +142,8 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
         return content.trailingZeroBitCount
     }
 
-    public static func /(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        return .init(lhs.content / rhs.content)
-    }
-
-    public static func /=(lhs: inout SignedValue, rhs: SignedValue) {
-        lhs = lhs / rhs
-    }
-
-    public static func %(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        return .init(lhs.content % rhs.content)
-    }
-
-    public static func %=(lhs: inout SignedValue, rhs: SignedValue) {
-        lhs = lhs % rhs
-    }
-
     public static var bitWidth: Int {
         return Storage.bitWidth
-    }
-
-    public static func -=(lhs: inout SignedValue, rhs: SignedValue) {
-        lhs = lhs - rhs
-    }
-
-    public static func -(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        return .init(lhs.content - rhs.content)
-    }
-
-    public static func +=(lhs: inout SignedValue, rhs: SignedValue) {
-        lhs = lhs + rhs
-    }
-
-    public static func +(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        return .init(lhs.content + rhs.content)
-    }
-
-    public var hashValue: Int {
-        return content.hashValue
-    }
-
-    public static func *(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        return .init(lhs.content * rhs.content)
-    }
-
-    public static func *=(lhs: inout SignedValue, rhs: SignedValue) {
-        lhs = lhs * rhs
-    }
-
-    public static func ==(lhs: SignedValue, rhs: SignedValue) -> Bool {
-        return lhs.content == rhs.content
-    }
-
-    public static func <(lhs: SignedValue, rhs: SignedValue) -> Bool {
-        return lhs.content < rhs.content
     }
 }
 

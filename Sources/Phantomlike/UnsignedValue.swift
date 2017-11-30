@@ -22,16 +22,36 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
         content = .init(bits)
     }
 
-    public var words: Words {
-        return content.words
+    public init(integerLiteral value: IntegerLiteralType) {
+        content = .init(integerLiteral: value)
     }
 
-    public var magnitude: Magnitude {
-        return content.magnitude
+    public var description: String {
+        return "UnsignedValue(\(content), unit: \(Unit.self))"
     }
 
-    public var trailingZeroBitCount: Int {
-        return content.trailingZeroBitCount
+    public static func +(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
+        return .init(lhs.content + rhs.content)
+    }
+
+    public static func +=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
+        lhs = lhs + rhs
+    }
+
+    public static func -(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
+        return .init(lhs.content - rhs.content)
+    }
+
+    public static func -=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
+        lhs = lhs - rhs
+    }
+
+    public static func *(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
+        return .init(lhs.content * rhs.content)
+    }
+
+    public static func *=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
+        lhs = lhs * rhs
     }
 
     public static func /(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
@@ -50,12 +70,16 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
         lhs = lhs % rhs
     }
 
-    public static var bitWidth: Int {
-        return Storage.bitWidth
+    public var hashValue: Int {
+        return content.hashValue
     }
 
-    public var description: String {
-        return "UnsignedValue(\(content), unit: \(Unit.self))"
+    public static func ==(lhs: UnsignedValue, rhs: UnsignedValue) -> Bool {
+        return lhs.content == rhs.content
+    }
+
+    public static func <(lhs: UnsignedValue, rhs: UnsignedValue) -> Bool {
+        return lhs.content < rhs.content
     }
 
     public func addingReportingOverflow(_ rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
@@ -105,43 +129,19 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
         return .init(content.byteSwapped)
     }
 
-    public static func -=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        lhs = lhs - rhs
+    public var words: Words {
+        return content.words
     }
 
-    public static func -(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
-        return .init(lhs.content - rhs.content)
+    public var magnitude: Magnitude {
+        return content.magnitude
     }
 
-    public static func +=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        lhs = lhs + rhs
+    public var trailingZeroBitCount: Int {
+        return content.trailingZeroBitCount
     }
 
-    public static func +(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
-        return .init(lhs.content + rhs.content)
-    }
-
-    public init(integerLiteral value: IntegerLiteralType) {
-        content = .init(integerLiteral: value)
-    }
-
-    public var hashValue: Int {
-        return content.hashValue
-    }
-
-    public static func *(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
-        return .init(lhs.content * rhs.content)
-    }
-
-    public static func *=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        lhs = lhs * rhs
-    }
-
-    public static func ==(lhs: UnsignedValue, rhs: UnsignedValue) -> Bool {
-        return lhs.content == rhs.content
-    }
-
-    public static func <(lhs: UnsignedValue, rhs: UnsignedValue) -> Bool {
-        return lhs.content < rhs.content
+    public static var bitWidth: Int {
+        return Storage.bitWidth
     }
 }
