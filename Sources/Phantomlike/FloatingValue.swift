@@ -6,91 +6,6 @@
 ////  Copyright © 2017 Adam Nemecek. All rights reserved.
 ////
 struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
-    init?<T>(exactly source: T) where T : BinaryInteger {
-        fatalError()
-    }
-
-    mutating func round(_ rule: FloatingPointRoundingRule) {
-        fatalError()
-    }
-
-    static func -=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        fatalError()
-    }
-
-    static func -(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        fatalError()
-    }
-
-    static func+=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        fatalError()
-    }
-
-    init(_ value: UInt8) {
-        fatalError()
-    }
-
-    init(_ value: Int8) {
-        fatalError()
-    }
-
-    init(_ value: UInt16) {
-        fatalError()
-    }
-
-    init(_ value: Int16) {
-        fatalError()
-    }
-
-    init(_ value: UInt32) {
-        fatalError()
-    }
-
-    init(_ value: Int32) {
-        fatalError()
-    }
-
-    init(_ value: UInt64) {
-        fatalError()
-    }
-
-    init(_ value: Int64) {
-        fatalError()
-    }
-
-    init(_ value: UInt) {
-        fatalError()
-    }
-
-    init(_ value: Int) {
-        fatalError()
-    }
-
-
-    init(floatLiteral value: Storage.FloatLiteralType) {
-        fatalError()
-    }
-
-    static func +(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        fatalError()
-    }
-
-    init(sign: FloatingPointSign, exponentBitPattern: RawExponent, significandBitPattern: RawSignificand) {
-        fatalError()
-    }
-
-    init(_ value: Float) {
-        fatalError()
-    }
-
-    init(_ value: Double) {
-        fatalError()
-    }
-
-    init(_ value: Float80) {
-        fatalError()
-    }
-
     typealias IntegerLiteralType = Storage.IntegerLiteralType
     typealias Exponent = Storage.Exponent
     typealias FloatLiteralType = Storage.FloatLiteralType
@@ -100,183 +15,271 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
     typealias RawSignificand = Storage.RawSignificand
     typealias RawExponent = Storage.RawExponent
 
-    private let value: Storage
+    private let content: Storage
 
-    init(integerLiteral value: IntegerLiteralType) {
+    public init(_ value: UInt8) {
         fatalError()
     }
 
-    init(sign: FloatingPointSign, exponent: Exponent, significand: FloatingValue) {
+    public init(_ value: Int8) {
+        content = .init(value)
+    }
+
+    public init(_ value: UInt16) {
+        content = .init(value)
+    }
+
+    public init(_ value: Int16) {
+        content = .init(value)
+    }
+
+    public init(_ value: UInt32) {
+        content = .init(value)
+    }
+
+    public init(_ value: Int32) {
+        content = .init(value)
+    }
+
+    public init(_ value: UInt64) {
+        content = .init(value)
+    }
+
+    public init(_ value: Int64) {
+        content = .init(value)
+    }
+
+    public init(_ value: UInt) {
+        content = .init(value)
+    }
+
+    public init(_ value: Int) {
+        content = .init(value)
+    }
+
+    public init(_ value: Float) {
+        content = .init(value)
+    }
+
+    public init(_ value: Double) {
+        content = .init(value)
+    }
+
+    public init(_ value: Float80) {
+        content = .init(value)
+    }
+
+    public init(floatLiteral value: FloatLiteralType) {
+        
+    }
+
+    public static func +(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
         fatalError()
     }
 
-    static var nan: FloatingValue {
+    init?<T>(exactly source: T) where T : BinaryInteger {
         fatalError()
     }
 
-    static var signalingNaN: FloatingValue {
+    mutating func round(_ rule: FloatingPointRoundingRule) {
         fatalError()
     }
 
-    static var infinity: FloatingValue {
+    public static func -=(lhs: inout FloatingValue, rhs: FloatingValue) {
         fatalError()
     }
 
-    static var greatestFiniteMagnitude: FloatingValue {
+    public static func -(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
         fatalError()
     }
 
-    static var pi: FloatingValue {
-        fatalError()
-    }
-
-    var ulp: FloatingValue {
-        fatalError()
-    }
-
-    static var leastNormalMagnitude: FloatingValue {
-        fatalError()
-    }
-
-    static var leastNonzeroMagnitude: FloatingValue {
-        fatalError()
-    }
-
-    var sign: FloatingPointSign {
-        return value.sign
-    }
-
-    var exponent: Exponent {
-        return value.exponent
-    }
-
-    var significand: FloatingValue {
-        fatalError()
-    }
-
-    static func *(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        fatalError()
-    }
-
-    static func *=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        fatalError()
-    }
-
-    static func /(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        fatalError()
-    }
-
-    static func /=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        fatalError()
-    }
-
-    mutating func formRemainder(dividingBy other: FloatingValue) {
-        fatalError()
-    }
-
-    mutating func formTruncatingRemainder(dividingBy other: FloatingValue) {
-        fatalError()
-    }
-
-    mutating func formSquareRoot() {
-        fatalError()
-    }
-
-    mutating func addProduct(_ lhs: FloatingValue, _ rhs: FloatingValue) {
-        fatalError()
-    }
-
-    var nextUp: FloatingValue {
-        fatalError()
-    }
-
-    func isEqual(to other: FloatingValue) -> Bool {
-        fatalError()
-    }
-
-    func isLess(than other: FloatingValue) -> Bool {
-        fatalError()
-    }
-
-    func isLessThanOrEqualTo(_ other: FloatingValue) -> Bool {
-        fatalError()
-    }
-
-    var isNormal: Bool {
-        fatalError()
-    }
-
-    var isFinite: Bool {
-        fatalError()
-    }
-
-    var isZero: Bool {
-        fatalError()
-    }
-
-    var isSubnormal: Bool {
-        fatalError()
-    }
-
-    var isInfinite: Bool {
-        fatalError()
-    }
-
-    var isNaN: Bool {
-        fatalError()
-    }
-
-    var isSignalingNaN: Bool {
-        fatalError()
-    }
-
-    var isCanonical: Bool {
-        fatalError()
-    }
-
-    var magnitude: Magnitude {
+    public static func+=(lhs: inout FloatingValue, rhs: FloatingValue) {
         fatalError()
     }
 
 
-
-    static var exponentBitCount: Int {
+    public init(sign: FloatingPointSign, exponentBitPattern: RawExponent, significandBitPattern: RawSignificand) {
         fatalError()
     }
 
-    static var significandBitCount: Int {
+    public init(integerLiteral value: IntegerLiteralType) {
         fatalError()
     }
 
-    var exponentBitPattern: RawExponent {
+    public init(sign: FloatingPointSign, exponent: Exponent, significand: FloatingValue) {
         fatalError()
     }
 
-    var significandBitPattern: RawSignificand {
+    public static var nan: FloatingValue {
         fatalError()
     }
 
-    var binade: FloatingValue {
+    public static var signalingNaN: FloatingValue {
         fatalError()
     }
 
-    var significandWidth: Int {
+    public static var infinity: FloatingValue {
         fatalError()
     }
 
-    func distance(to other: FloatingValue) -> Stride {
+    public static var greatestFiniteMagnitude: FloatingValue {
         fatalError()
     }
 
-    func advanced(by n: Stride) -> FloatingValue {
+    public static var pi: FloatingValue {
         fatalError()
     }
 
-    var hashValue: Int {
-        return value.hashValue
+    public var ulp: FloatingValue {
+        fatalError()
     }
 
+    public static var leastNormalMagnitude: FloatingValue {
+        fatalError()
+    }
 
+    public static var leastNonzeroMagnitude: FloatingValue {
+        fatalError()
+    }
 
+    public var sign: FloatingPointSign {
+        return content.sign
+    }
+
+    public var exponent: Exponent {
+        return content.exponent
+    }
+
+    public var significand: FloatingValue {
+        fatalError()
+    }
+
+    public static func *(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
+        fatalError()
+    }
+
+    public static func *=(lhs: inout FloatingValue, rhs: FloatingValue) {
+        fatalError()
+    }
+
+    public static func /(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
+        fatalError()
+    }
+
+    public static func /=(lhs: inout FloatingValue, rhs: FloatingValue) {
+        fatalError()
+    }
+
+    public mutating func formRemainder(dividingBy other: FloatingValue) {
+        fatalError()
+    }
+
+    public mutating func formTruncatingRemainder(dividingBy other: FloatingValue) {
+        fatalError()
+    }
+
+    public mutating func formSquareRoot() {
+        var c = content
+        c.formSquareRoot()
+        self = .init(content: c)
+    }
+
+    public mutating func addProduct(_ lhs: FloatingValue, _ rhs: FloatingValue) {
+        var c = content
+        c.addProduct(lhs.content, rhs.content)
+        self = .init(content: c)
+    }
+
+    private init(content: Storage) {
+        self.content = content
+    }
+
+    public var nextUp: FloatingValue {
+        return .init(content: content.nextUp)
+    }
+
+    public func isEqual(to other: FloatingValue) -> Bool {
+        return content.isEqual(to: other.content)
+    }
+
+    public func isLess(than other: FloatingValue) -> Bool {
+        return content.isLess(than: other.content)
+    }
+
+    public func isLessThanOrEqualTo(_ other: FloatingValue) -> Bool {
+        return content.isLessThanOrEqualTo(other.content)
+    }
+
+    public var isNormal: Bool {
+        return content.isNormal
+    }
+
+    public var isFinite: Bool {
+        return content.isFinite
+    }
+
+    public var isZero: Bool {
+        return content.isZero
+    }
+
+    public var isSubnormal: Bool {
+        return content.isSubnormal
+    }
+
+    public var isInfinite: Bool {
+        return content.isInfinite
+    }
+
+    public var isNaN: Bool {
+        return content.isNaN
+    }
+
+    public var isSignalingNaN: Bool {
+        return content.isSignalingNaN
+    }
+
+    public var isCanonical: Bool {
+        return content.isCanonical
+    }
+
+    public var magnitude: Magnitude {
+        return content.magnitude
+    }
+
+    public static var exponentBitCount: Int {
+        return Storage.exponentBitCount
+    }
+
+    public static var significandBitCount: Int {
+        return Storage.significandBitCount
+    }
+
+    public var exponentBitPattern: RawExponent {
+        return content.exponentBitPattern
+    }
+
+    public var significandBitPattern: RawSignificand {
+        return content.significandBitPattern
+    }
+
+    public var binade: FloatingValue {
+        return .init(content: content.binade)
+    }
+
+    public var significandWidth: Int {
+        return content.significandWidth
+    }
+
+    public func distance(to other: FloatingValue) -> Stride {
+        return content.distance(to: other.content)
+    }
+
+    public func advanced(by n: Stride) -> FloatingValue {
+        return .init(content: content.advanced(by: n))
+    }
+
+    public var hashValue: Int {
+        return content.hashValue
+    }
 
 }
