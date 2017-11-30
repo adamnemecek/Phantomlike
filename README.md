@@ -1,6 +1,6 @@
 # Phantomlike
 
-This package contains three generic types `UnsignedValue<Storage, Unit>`, `SignedValue<Storage, Unit>`, `FloatingValue<Storage, Unit>`. These can be used to implement typesafe numeric values so that you can't accidentally add two values of with different types. The `Storage` parameter is used to specify the backing arithmetic type (signed, unsigned, floating respectively) for each value. The `Unit` parameter is a [phantom type](https://rustbyexample.com/generics/phantom.html), used for type checking of the units.
+This package contains three generic types `UnsignedValue<Storage, Unit>`, `SignedValue<Storage, Unit>`, `FloatingValue<Storage, Unit>`. These can be used to implement typesafe numeric values so that you can't accidentally add two values with different types (`Units`). The `Storage` parameter is used to specify the backing arithmetic type (signed, unsigned, floating respectively) for each value. The `Unit` parameter is a [phantom type](https://rustbyexample.com/generics/phantom.html), used for type checking of the units.
 
 # Installation
 Use Swift Package Manager. 
@@ -9,9 +9,9 @@ Use Swift Package Manager.
 import PackageDescription
 
 let package = Package(
-    name: "Phantomlike.swift",
+    name: "Phantomlike",
     dependencies: [
-      .Package(url: "https://github.com/adamnemecek/Phantomlike.swift.git", majorVersion: 1)
+      .Package(url: "https://github.com/adamnemecek/Phantomlike.git", majorVersion: 1)
     ]
 )
 ```
