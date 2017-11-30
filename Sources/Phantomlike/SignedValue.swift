@@ -60,29 +60,27 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
     }
 
     public func addingReportingOverflow(_ rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-        let r =  content.addingReportingOverflow(rhs.content)
+        let r = content.addingReportingOverflow(rhs.content)
         return (.init(r.partialValue), r.overflow)
     }
 
     public func subtractingReportingOverflow(_ rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-        let r =  content.subtractingReportingOverflow(rhs.content)
+        let r = content.subtractingReportingOverflow(rhs.content)
         return (.init(r.partialValue), r.overflow)
-
     }
 
     public func multipliedReportingOverflow(by rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-        let r =  content.multipliedReportingOverflow(by: rhs.content)
+        let r = content.multipliedReportingOverflow(by: rhs.content)
         return (.init(r.partialValue), r.overflow)
-
     }
 
     public func dividedReportingOverflow(by rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-        let r =  content.dividedReportingOverflow(by: rhs.content)
+        let r = content.dividedReportingOverflow(by: rhs.content)
         return (.init(r.partialValue), r.overflow)
     }
 
     public func remainderReportingOverflow(dividingBy rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
-        let r =  content.remainderReportingOverflow(dividingBy: rhs.content)
+        let r = content.remainderReportingOverflow(dividingBy: rhs.content)
         return (.init(r.partialValue), r.overflow)
     }
 
@@ -92,7 +90,7 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
     }
 
     public func dividingFullWidth(_ dividend: (high: SignedValue, low: Magnitude)) -> (quotient: SignedValue, remainder: SignedValue) {
-        let r =  content.dividingFullWidth((dividend.high.content, dividend.low))
+        let r = content.dividingFullWidth((dividend.high.content, dividend.low))
         return (.init(r.quotient), .init(r.remainder))
     }
 

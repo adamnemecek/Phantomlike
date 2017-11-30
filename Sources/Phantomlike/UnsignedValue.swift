@@ -66,13 +66,11 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
     public func subtractingReportingOverflow(_ rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
         let r = content.subtractingReportingOverflow(rhs.content)
         return (.init(r.partialValue), r.overflow)
-
     }
 
     public func multipliedReportingOverflow(by rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
         let r = content.multipliedReportingOverflow(by: rhs.content)
         return (.init(r.partialValue), r.overflow)
-
     }
 
     public func dividedReportingOverflow(by rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
