@@ -15,7 +15,7 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
     typealias RawSignificand = Storage.RawSignificand
     typealias RawExponent = Storage.RawExponent
 
-    private let content: Storage
+    private var content: Storage
 
     public init(_ value: UInt8) {
         fatalError()
@@ -70,11 +70,7 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
     }
 
     public init(floatLiteral value: FloatLiteralType) {
-        
-    }
-
-    public static func +(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        fatalError()
+            fatalError()
     }
 
     init?<T>(exactly source: T) where T : BinaryInteger {
@@ -82,19 +78,23 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
     }
 
     mutating func round(_ rule: FloatingPointRoundingRule) {
-        fatalError()
+
     }
 
     public static func -=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        fatalError()
+        lhs = lhs - rhs
     }
 
     public static func -(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        fatalError()
+        return .init(content: lhs.content - rhs.content)
+    }
+
+    public static func +(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
+        return .init(content: lhs.content + rhs.content)
     }
 
     public static func+=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        fatalError()
+        lhs = lhs + rhs
     }
 
 
@@ -107,39 +107,40 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
     }
 
     public init(sign: FloatingPointSign, exponent: Exponent, significand: FloatingValue) {
+//        content
         fatalError()
     }
 
     public static var nan: FloatingValue {
-        fatalError()
+        return .init(content: .nan)
     }
 
     public static var signalingNaN: FloatingValue {
-        fatalError()
+        return .init(content: .signalingNaN)
     }
 
     public static var infinity: FloatingValue {
-        fatalError()
+        return .init(content: .infinity)
     }
 
     public static var greatestFiniteMagnitude: FloatingValue {
-        fatalError()
+        return .init(content: .greatestFiniteMagnitude)
     }
 
     public static var pi: FloatingValue {
-        fatalError()
+        return .init(content: .pi)
     }
 
     public var ulp: FloatingValue {
-        fatalError()
+        return .init(content: content.ulp)
     }
 
     public static var leastNormalMagnitude: FloatingValue {
-        fatalError()
+        return .init(content: .leastNormalMagnitude)
     }
 
     public static var leastNonzeroMagnitude: FloatingValue {
-        fatalError()
+        return .init(content: .leastNonzeroMagnitude)
     }
 
     public var sign: FloatingPointSign {
@@ -151,43 +152,39 @@ struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
     }
 
     public var significand: FloatingValue {
-        fatalError()
+        return .init(content: content.significand)
     }
 
     public static func *(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        fatalError()
+        return .init(content: lhs.content * rhs.content)
     }
 
     public static func *=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        fatalError()
+        lhs = lhs * rhs
     }
 
     public static func /(lhs: FloatingValue, rhs: FloatingValue) -> FloatingValue {
-        fatalError()
+        return .init(content: lhs.content / rhs.content)
     }
 
     public static func /=(lhs: inout FloatingValue, rhs: FloatingValue) {
-        fatalError()
+        lhs = lhs / rhs
     }
 
     public mutating func formRemainder(dividingBy other: FloatingValue) {
-        fatalError()
+        content.formRemainder(dividingBy: other.content)
     }
 
     public mutating func formTruncatingRemainder(dividingBy other: FloatingValue) {
-        fatalError()
+        content.formTruncatingRemainder(dividingBy: other.content)
     }
 
     public mutating func formSquareRoot() {
-        var c = content
-        c.formSquareRoot()
-        self = .init(content: c)
+        content.formSquareRoot()
     }
 
     public mutating func addProduct(_ lhs: FloatingValue, _ rhs: FloatingValue) {
-        var c = content
-        c.addProduct(lhs.content, rhs.content)
-        self = .init(content: c)
+        content.addProduct(lhs.content, rhs.content)
     }
 
     private init(content: Storage) {
