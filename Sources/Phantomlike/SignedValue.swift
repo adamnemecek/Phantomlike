@@ -23,40 +23,12 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
         content = .init(bits)
     }
 
-    public var words: Words {
-        return content.words
-    }
-
-    public var magnitude: Magnitude {
-        return content.magnitude
-    }
-
-    public var trailingZeroBitCount: Int {
-        return content.trailingZeroBitCount
-    }
-
-    public static func /(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        return .init(lhs.content / rhs.content)
-    }
-
-    public static func /=(lhs: inout SignedValue, rhs: SignedValue) {
-        lhs = lhs / rhs
-    }
-
-    public static func %(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
-        return .init(lhs.content % rhs.content)
-    }
-
-    public static func %=(lhs: inout SignedValue, rhs: SignedValue) {
-        lhs = lhs % rhs
-    }
-
-    public static var bitWidth: Int {
-        return Storage.bitWidth
+    public init(integerLiteral value: IntegerLiteralType) {
+        content = .init(integerLiteral: value)
     }
 
     public var description: String {
-        return "\(Storage.self)(\(content))"
+        return "SignedValue(\(content), unit: \(Unit.self))"
     }
 
     public func addingReportingOverflow(_ rhs: SignedValue) -> (partialValue: SignedValue, overflow: Bool) {
@@ -106,6 +78,38 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
         return .init(content.byteSwapped)
     }
 
+    public var words: Words {
+        return content.words
+    }
+
+    public var magnitude: Magnitude {
+        return content.magnitude
+    }
+
+    public var trailingZeroBitCount: Int {
+        return content.trailingZeroBitCount
+    }
+
+    public static func /(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content / rhs.content)
+    }
+
+    public static func /=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs / rhs
+    }
+
+    public static func %(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
+        return .init(lhs.content % rhs.content)
+    }
+
+    public static func %=(lhs: inout SignedValue, rhs: SignedValue) {
+        lhs = lhs % rhs
+    }
+
+    public static var bitWidth: Int {
+        return Storage.bitWidth
+    }
+
     public static func -=(lhs: inout SignedValue, rhs: SignedValue) {
         lhs = lhs - rhs
     }
@@ -120,10 +124,6 @@ public struct SignedValue<Storage: SignedInteger & FixedWidthInteger, Unit> : Si
 
     public static func +(lhs: SignedValue, rhs: SignedValue) -> SignedValue {
         return .init(lhs.content + rhs.content)
-    }
-
-    public init(integerLiteral value: IntegerLiteralType) {
-        content = .init(integerLiteral: value)
     }
 
     public var hashValue: Int {

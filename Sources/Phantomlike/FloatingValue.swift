@@ -6,7 +6,7 @@
 //  Copyright © 2017 Adam Nemecek. All rights reserved.
 //
 
-public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint {
+public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloatingPoint, CustomStringConvertible {
     public typealias IntegerLiteralType = Storage.IntegerLiteralType
     public typealias Exponent = Storage.Exponent
     public typealias FloatLiteralType = Storage.FloatLiteralType
@@ -151,6 +151,10 @@ public struct FloatingValue<Storage: BinaryFloatingPoint, Unit> : BinaryFloating
 
     public var sign: FloatingPointSign {
         return content.sign
+    }
+
+    public var description: String {
+        return "FloatingValue(\(content), unit: \(Unit.self))"
     }
 
     public var exponent: Exponent {

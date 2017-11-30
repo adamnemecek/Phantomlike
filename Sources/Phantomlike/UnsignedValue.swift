@@ -55,7 +55,7 @@ public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> 
     }
 
     public var description: String {
-        return "\(Storage.self)(\(content))"
+        return "UnsignedValue(\(content), unit: \(Unit.self))"
     }
 
     public func addingReportingOverflow(_ rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
