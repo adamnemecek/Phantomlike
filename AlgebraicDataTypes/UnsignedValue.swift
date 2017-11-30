@@ -8,115 +8,134 @@
 
 
 public struct UnsignedValue<Storage: UnsignedInteger & FixedWidthInteger, Unit> : UnsignedInteger, FixedWidthInteger {
+    private var content: Storage
 
     public typealias Words = Storage.Words
     public typealias IntegerLiteralType = Storage.IntegerLiteralType
 
     public init<T>(_ source: T) where T : BinaryFloatingPoint {
-        fatalError()
+        content = .init(source)
     }
 
     public init(_truncatingBits: UInt) {
-        fatalError()
+        content = .init(_truncatingBits)
     }
 
-    public var words: Storage.Words {
-        fatalError()
+    public var words: Words {
+        return content.words
     }
 
     public var trailingZeroBitCount: Int {
-        fatalError()
+        return content.trailingZeroBitCount
     }
 
     public static func /(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
-        fatalError()
+        return .init(lhs.content / rhs.content)
     }
 
     public static func /=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        fatalError()
+        lhs.content /= rhs.content
     }
 
     public static func %(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
-        fatalError()
+        return .init(lhs.content % rhs.content)
     }
 
     public static func %=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        fatalError()
+        lhs.content %= rhs.content
     }
 
     public static var bitWidth: Int {
-        fatalError()
+        return Storage.bitWidth
     }
 
     public func addingReportingOverflow(_ rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
-        fatalError()
+        let r =  content.addingReportingOverflow(rhs.content)
+        return (.init(r.partialValue), r.overflow)
     }
 
     public func subtractingReportingOverflow(_ rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
-        fatalError()
+        let r =  content.subtractingReportingOverflow(rhs.content)
+        return (.init(r.partialValue), r.overflow)
+
     }
 
     public func multipliedReportingOverflow(by rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
-        fatalError()
+        let r =  content.multipliedReportingOverflow(by: rhs.content)
+        return (.init(r.partialValue), r.overflow)
+
     }
 
     public func dividedReportingOverflow(by rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
-        fatalError()
+        let r =  content.dividedReportingOverflow(by: rhs.content)
+        return (.init(r.partialValue), r.overflow)
     }
 
     public func remainderReportingOverflow(dividingBy rhs: UnsignedValue) -> (partialValue: UnsignedValue, overflow: Bool) {
-        fatalError()
+        let r =  content.remainderReportingOverflow(dividingBy: rhs.content)
+        return (.init(r.partialValue), r.overflow)
+
     }
 
     public func multipliedFullWidth(by other: UnsignedValue) -> (high: UnsignedValue, low: UnsignedValue.Magnitude) {
+//        let r =  content.multipliedFullWidth(rhs.content)
+//        return (.init(r.high), )
         fatalError()
     }
 
-    public func dividingFullWidth(_ dividend: (high: UnsignedValue, low: UnsignedValue.Magnitude)) -> (quotient: UnsignedValue, remainder: UnsignedValue) {
+    public func dividingFullWidth(_ dividend: (high: UnsignedValue, low: Magnitude)) -> (quotient: UnsignedValue, remainder: UnsignedValue) {
         fatalError()
     }
 
     public var nonzeroBitCount: Int {
-        fatalError()
+        return content.nonzeroBitCount
     }
 
     public var leadingZeroBitCount: Int {
-        fatalError()
+        return content.leadingZeroBitCount
     }
 
     public var byteSwapped: UnsignedValue {
-        fatalError()
+        return .init(content.byteSwapped)
     }
 
     public static func -=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        fatalError()
+        lhs = lhs - rhs
     }
 
     public static func -(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
-        fatalError()
+        return .init(lhs.content - rhs.content)
     }
 
     public static func +=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        fatalError()
+        lhs = lhs + rhs
     }
 
     public static func +(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
-        fatalError()
+        return .init(lhs.content + rhs.content)
     }
 
-    public init(integerLiteral value: Storage.IntegerLiteralType) {
-        fatalError()
+    public init(integerLiteral value: IntegerLiteralType) {
+        content = .init(integerLiteral: value)
     }
 
     public var hashValue: Int {
-        fatalError()
+        return content.hashValue
     }
 
     public static func *(lhs: UnsignedValue, rhs: UnsignedValue) -> UnsignedValue {
-        fatalError()
+        return .init(lhs.content * rhs.content)
     }
 
     public static func *=(lhs: inout UnsignedValue, rhs: UnsignedValue) {
-        fatalError()
+        lhs = lhs * rhs
+    }
+
+    public static func ==(lhs: UnsignedValue, rhs: UnsignedValue)   -> Bool {
+        return lhs.content == rhs.content
+    }
+
+    public static func <(lhs: UnsignedValue, rhs: UnsignedValue)   -> Bool {
+        return lhs.content < rhs.content
     }
 }
